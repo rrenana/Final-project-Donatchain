@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <Navbar />
-      <div className="p-6">
+      <div className="p-6 max-w-6xl mx-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/campaigns" element={<Campaigns />} />

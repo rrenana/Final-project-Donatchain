@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+a.active {
+  background-color: #16a34a; /* ירוק Tailwind */
+  color: white;
+}

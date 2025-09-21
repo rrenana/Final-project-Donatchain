@@ -1,34 +1,41 @@
-import { useState } from "react"
-import SearchBar from "../components/SearchBar"
-import CampaignCard from "../components/CampaignCard"
+import { useState } from "react";
+import SearchBar from "../components/SearchBar";
+import CampaignCard from "../components/CampaignCard";
 
 const campaigns = [
-  { title: "Education for All", description: "Help provide education for underprivileged children." },
-  { title: "Medical Aid", description: "Support families in need of urgent medical treatment." },
-  { title: "Food Donations", description: "Provide meals for communities in crisis." },
-]
+  { title: "חינוך לכולם", description: "עזור לספק חינוך לילדים מעוטי יכולת." },
+  { title: "סיוע רפואי", description: "תמוך במשפחות הזקוקות לטיפולים רפואיים דחופים." },
+  { title: "תרומות מזון", description: "ספק ארוחות לקהילות במצוקה." },
+];
 
 export default function Campaigns() {
-  const [results, setResults] = useState(campaigns)
+  const [results, setResults] = useState(campaigns);
 
   const handleSearch = (query: string) => {
     const filtered = campaigns.filter(c =>
-      c.title.toLowerCase().includes(query.toLowerCase()) ||
-      c.description.toLowerCase().includes(query.toLowerCase())
-    )
-    setResults(filtered)
-  }
+      c.title.includes(query) || c.description.includes(query)
+    );
+    setResults(filtered);
+  };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Campaigns</h2>
-      <SearchBar onSearch={handleSearch} />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+    <div className="p-6">
+      {/* חיפוש ומיון */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <SearchBar onSearch={handleSearch} />
+        <select className="border rounded-md p-2">
+          <option>מיין לפי</option>
+          <option>פופולריות</option>
+          <option>הכי חדש</option>
+        </select>
+      </div>
+
+      {/* גריד של קמפיינים */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {results.map((c, i) => (
           <CampaignCard key={i} title={c.title} description={c.description} />
         ))}
       </div>
     </div>
-  )
+  );
 }
-
